@@ -1,5 +1,5 @@
 (ns connfujur.test.core
-  (:use [connfujur.core])
+  (:use [connfujure.core])
   (:use [clojure.test]))
 
 (deftest replace-me ;; FIXME: write

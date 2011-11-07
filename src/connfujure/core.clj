@@ -1,1 +1,1 @@
-(ns connfujur.core)
+(ns connfujure.core)
