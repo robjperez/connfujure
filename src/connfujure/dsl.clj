@@ -5,7 +5,7 @@
   (cond
    (instance? connfujure.sms.ISmsChannel channel ) :sms))
 
-(defn connection [& channels]
+(defn conference [& channels]
     (apply assoc {}
            (mapcat
             (fn [channel] [(get-protocol channel ) channel])
