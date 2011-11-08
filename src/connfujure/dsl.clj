@@ -1,5 +1,5 @@
 (ns connfujure.dsl
-  (require [connfujure.sms]))
+  (require [connfujure.sms ]))
 
 (defn get-protocol [channel]
   (cond
@@ -14,12 +14,15 @@
 
 
 
-(defmacro sms [& forms]
+
+(defmacro listen-channel [forms protocol]
   (let [ formated-forms
         (map
          (fn [[verb params method]]
-           (list (symbol (str "do-"  verb)) (vec (concat [ '_ ] params)) method)) forms)]
+           (list verb (vec (concat ['_] params)) method)) forms)]
     `(reify 
-       connfujure.sms/ISmsChannel
+       ~protocol
        ~@formated-forms)))
+
+(defmacro sms [& forms] `(listen-channel ~forms connfujure.sms/ISmsChannel )) 
      

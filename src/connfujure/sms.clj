@@ -3,4 +3,4 @@
 (defrecord Sms [from to body])
 
 (defprotocol ISmsChannel
-  (do-new [this ^Sms post] "callback for sms-event"))
+  (on-new [this ^Sms post] "callback for sms-event"))
