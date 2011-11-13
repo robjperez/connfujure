@@ -7,7 +7,7 @@ An example of application should be:
      (rss 
      	(on-new [{content :content }]
   		 (do 
-      	  	     (println (str "Grea new!: " content)))))))
+      	  	     (println (str "Great new!: " content)))))))
       	  	     
 
 
