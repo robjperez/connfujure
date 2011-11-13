@@ -3,9 +3,8 @@
   (use [ clojure.data.json :only (read-json)]))
 
 (defn parse-data [data]
-  (do (println (str "Line:" data ))
-      (if (not (empty? data))
-        (read-json data))))
+  (if (not (empty? data))
+    (read-json data)))
         
 
 (defn do-request [ TOKEN]

@@ -25,6 +25,5 @@
       (fun (channel handler) data)))) 
    
 (defn listen-events [TOKEN handler]
-  (reduce (fn [_ event] (send channel-runner
-                                  (fn [_] (execute handler event)))) nil (lazy-event-seq TOKEN)))
+  (doall (map (fn [event] (send channel-runner (fn [_] (execute handler event)))) (lazy-event-seq TOKEN))))
  
