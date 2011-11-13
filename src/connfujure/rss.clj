@@ -1,11 +1,12 @@
 (ns connfujure.rss
   (require connfujure.event)
-  (import connfujure.event.Event))
+  (import connfujure.event.Event)
+  (require connfujure.message)
+  (import connfujure.message.Message))
 
-(defrecord Rss [name from content])
 
-(defn rss-from-message [{content :title {from :id} :actor {name :bare_uri} :backchat}]
-  (Rss. name from content))
+(defn create-message [{content :title {from :id} :actor {id :bare_uri} :backchat}]
+  (Message. id content from nil :rss))
  
 (defprotocol IRssChannel
   (on-new [this post] "Handler for rss")
@@ -16,5 +17,5 @@
   (if (map? message)
     (let [{ {source :source }:backchat } message ]
       (if (= "WEBFEED" (.toUpperCase source))
-        (Event. :rss (rss-from-message message) on-new)))))
+        (Event. :rss (create-message message) on-new)))))
 

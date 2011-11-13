@@ -1,11 +1,13 @@
 (ns connfujure.sms
   (require connfujure.event)
-  (import connfujure.event.Event ))
+  (import connfujure.event.Event )
+  (require connfujure.message)
+  (import connfujure.message.Message))
 
 (defrecord Sms [from to content])
 
-(defn sms-from-message [{:keys [from to message]}]
-  (Sms. from to message))
+(defn create-message [{:keys [ appId from to message]}]
+  (Message. appId message from to :sms ))
 
 
 (defprotocol ISmsChannel
@@ -15,5 +17,5 @@
   (if (vector? message)
     (let [[type content] message ]
       (if (= (.toUpperCase type) "SMS")
-        (let [data (sms-from-message content) ]
+        (let [data (create-message content) ]
           (Event. :sms data on-new ))))))
