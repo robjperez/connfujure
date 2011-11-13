@@ -2,15 +2,13 @@ Work in progress!!!
 
 An example of application should be:
 
- (application TOKEN 
+ (run-application TOKEN 
   (conference
-     (voice 
-     	(on-join [{dest :destination orig :origin}]
+     (rss 
+     	(on-new [{content :content }]
   		 (do 
-      	  	     (println (str "new call receiverd on number " dest)
-      	  	     (if (--> (find_by_conference_number dest) (is-allowed? orig))
-              	    	(println "whitelist number received")
-              	    	(println "not whitelist number")))))
+      	  	     (println (str "Grea new!: " content)))))))
+      	  	     
 
 
 
