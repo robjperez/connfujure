@@ -3,7 +3,7 @@
   (use [connfujure.sms :only (sms-event)])
   (use [connfujure.rss :only (rss-event)])
   (use [connfujure.twitter :only (twitter-event)])
-  (use [connfujure.call :only (call-event)])
+  (use [connfujure.voice :only (voice-event)])
   (require connfujure.event)
   (import connfujure.event.Event))
 
@@ -12,7 +12,7 @@
    (sms-event message)
    (rss-event message)
    (twitter-event message)
-   (call-event message)
+   (voice-event message)
       ))
 
 (defn lazy-event-seq [TOKEN] (filter identity (map #(dispatch-event %) (do-request TOKEN))))
